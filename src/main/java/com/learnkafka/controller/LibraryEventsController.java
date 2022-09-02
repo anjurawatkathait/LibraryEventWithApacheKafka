@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @Slf4j
 public class LibraryEventsController {
@@ -21,7 +23,7 @@ public class LibraryEventsController {
     LibraryEventProducer libraryEventProducer;
 
     @PostMapping("/v1/libraryevent")
-    public ResponseEntity<LibraryEvent> postLibraryEvent(@RequestBody LibraryEvent libraryEvent) throws JsonProcessingException, InterruptedException {
+    public ResponseEntity<LibraryEvent> postLibraryEvent(@RequestBody @Valid LibraryEvent libraryEvent) throws JsonProcessingException, InterruptedException {
 
         //invoke kafka producer
         //libraryEventProducer.sendLibraryEvent(libraryEvent); // asynchornous behaviour
