@@ -48,8 +48,8 @@ public class LibraryEventProducer {
             }
         });
     }
-
-    public void sendLibraryEventApproach2(LibraryEvent libraryEvent) throws JsonProcessingException {
+    // For writing unit test case for onFailure() we need to have this method type as ListenableFuture
+    public ListenableFuture<SendResult<Integer,String>> sendLibraryEventApproach2(LibraryEvent libraryEvent) throws JsonProcessingException {
 
         Integer key = libraryEvent.getLibraryEventId();
         String value = objectMapper.writeValueAsString(libraryEvent); //value is the entire payload so im converting that into string
@@ -67,6 +67,7 @@ public class LibraryEventProducer {
                 handleSuccess(key, value, result);
             }
         });
+        return listenableFuture;
     }
 
     private ProducerRecord<Integer, String> buildProducerRecord(Integer key, String value, String topic) {
