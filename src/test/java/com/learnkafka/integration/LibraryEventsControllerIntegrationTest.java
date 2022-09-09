@@ -56,7 +56,7 @@ public class LibraryEventsControllerIntegrationTest implements IntegrationTest {
 
 
     @Test
-    //@Timeout(5)
+    @Timeout(5)
     void postLibraryEvent() throws InterruptedException {
         Book book = Book.builder()
                 .bookId(123).bookAuthor("Andrew")
@@ -68,7 +68,6 @@ public class LibraryEventsControllerIntegrationTest implements IntegrationTest {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("content-type", MediaType.APPLICATION_JSON.toString());
-
         HttpEntity<LibraryEvent> request =
                 new HttpEntity<>(libraryEvent,headers);
 
